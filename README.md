@@ -41,30 +41,48 @@ pip install -e .
 ---
 
 ## 🚀 Usage
-### Extract DOIs / titles
-# Using the installed command
-bib-extractor --dir path/to/papers --output paper_info.json
 
-# If 'bib-extractor' is not in your PATH (common on Windows)
+### 1. Extract DOIs / Titles
+This step scans your PDFs and creates a metadata JSON.
+
+**Standard Command:**
+```bash
+bib-extractor --dir path/to/papers --output paper_info.json
+```
+
+**Windows / Path Fallback:**
+If the command above says "not found", use the Python module directly:
+```bash
 python -m bib_extractor --dir path/to/papers --output paper_info.json
 ```
-- `--dir` defaults to the current working directory.
-- `--output` defaults to `paper_info.json`.
 
-### Fetch BibTeX entries & Auto-Rename
+---
+
+### 2. Fetch BibTeX & Auto-Rename
+This step uses the JSON from step 1 to download metadata and (optionally) rename files.
+
+**Standard Command:**
 ```bash
-# Fetch entries and automatically rename your PDFs
 bib-fetch --input paper_info.json --output papers.bib --rename --dir path/to/papers
+```
 
-# If 'bib-fetch' is not in your PATH
+**Windows / Path Fallback:**
+```bash
 python -m bib_extractor.fetch_bibtex --input paper_info.json --output papers.bib --rename --dir path/to/papers
 ```
-- `--input`: The JSON file from the extractor.
-- `--output`: The destination `.bib` file.
-- `--citations`: (Optional) Output file for a formatted reference list (e.g., `refs.txt`).
-- `--style`: (Optional) Citation style for the list (`apa` or `mla`, default is `apa`).
-- `--rename`: (Optional) Automatically renames the files in `--dir` to a standard format: `Year - Author - Title.pdf`.
-- `--dir`: (Required if renaming) The folder where your original PDFs are located.
+
+> [!TIP]
+> **Windows Users**: If the short commands (`bib-extractor`) don't work, ensure your Python `Scripts` folder is added to your system environment variables. Alternatively, always use the `python -m` method shown above.
+### 🛠️ Options & Arguments
+
+| Flag | Description | Default |
+| :--- | :--- | :--- |
+| `--dir` | Directory containing PDF files (or where to rename) | Current Dir |
+| `--output` | Path to save the BibTeX `.bib` file | `paper_info.json` |
+| `--input` | The JSON metadata file from Step 1 | *Required for Step 2* |
+| `--citations` | Output file for a formatted reference list (e.g. `refs.txt`) | Optional |
+| `--style` | Citation style for the reference list (`apa` or `mla`) | `apa` |
+| `--rename` | Automatically rename PDFs to `Year - Author - Title.pdf` | Optional |
 
 ---
 
