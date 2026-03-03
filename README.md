@@ -54,12 +54,15 @@ python extract_bib_info.py --dir path/to/papers --output paper_info.json
 - `--dir` defaults to the current working directory.
 - `--output` defaults to `paper_info.json`.
 
-### Fetch BibTeX entries
+### Fetch BibTeX entries & Auto-Rename
 ```bash
-# From the repository root (or after installing via pip)
-python fetch_bibtex.py --input paper_info.json --output papers.bib
+# Fetch entries and automatically rename your PDFs
+bib-fetch --input paper_info.json --output papers.bib --rename --dir path/to/papers
 ```
-The script reads the JSON produced by the extractor, fetches BibTeX records for entries that have a DOI, and writes them to `papers.bib`.
+- `--input`: The JSON file from the extractor.
+- `--output`: The destination `.bib` file.
+- `--rename`: (Optional) Automatically renames the files in `--dir` to a standard format: `Year - Author - Title.pdf`.
+- `--dir`: (Required if renaming) The folder where your original PDFs are located.
 
 The extractor prints progress and writes a JSON array like:
 ```json

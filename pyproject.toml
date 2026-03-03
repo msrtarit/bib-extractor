@@ -1,6 +1,6 @@
 [project]
 name = "bib-extractor"
-version = "0.1.0"
+version = "0.1.1"
 description = "Extract DOIs or titles from PDF papers and generate a BibTeX bibliography"
 readme = "README.md"
 requires-python = ">=3.8"
