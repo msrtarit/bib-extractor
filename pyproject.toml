@@ -18,8 +18,9 @@ Homepage = "https://github.com/msrtarit/bib_extractor"
 Repository = "https://github.com/msrtarit/bib_extractor.git"
 
 [project.scripts]
-# Console entry point
+# Console entry points
 bib-extractor = "extract_bib_info:main"
+bib-fetch = "fetch_bibtex:main"
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
