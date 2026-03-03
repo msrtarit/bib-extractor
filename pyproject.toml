@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Extract DOIs or titles from PDF papers and generate a BibTeX bibliography"
 readme = "README.md"
 requires-python = ">=3.8"
-authors = [{name = "msrtarit", email = ""}]
+authors = [{name = "msrtarit"}]
 license = {text = "MIT"}
 keywords = ["bibtex", "doi", "pdf", "extractor"]
 classifiers = [
@@ -18,9 +18,8 @@ Homepage = "https://github.com/msrtarit/bib_extractor"
 Repository = "https://github.com/msrtarit/bib_extractor.git"
 
 [project.scripts]
-# Console entry points
-bib-extractor = "extract_bib_info:main"
-bib-fetch = "fetch_bibtex:main"
+bib-extractor = "bib_extractor.extract_bib_info:main"
+bib-fetch = "bib_extractor.fetch_bibtex:main"
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
