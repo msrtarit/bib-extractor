@@ -50,21 +50,60 @@ def generate_citation(bib_data: Dict[str, str], style: str = "apa") -> str:
     year = bib_data.get("year", "n.d.")
     title = bib_data.get("title", "Unknown Title")
     journal = bib_data.get("journal", bib_data.get("publisher", ""))
+    volume = bib_data.get("volume", "")
+    number = bib_data.get("number", "")
+    pages = bib_data.get("pages", "")
     
-    # Handle multiple authors for APA: "Smith, J., & Jones, M."
+    # Handle multiple authors
     authors_list = author.split(" and ")
-    if len(authors_list) > 1:
-        author_str = ", ".join(authors_list[:-1]) + " & " + authors_list[-1]
-    else:
-        author_str = authors_list[0]
-
+    
     if style.lower() == "apa":
+        # APA: "Smith, J., & Jones, M. (Year). Title. Journal."
+        if len(authors_list) > 1:
+            author_str = ", ".join(authors_list[:-1]) + " & " + authors_list[-1]
+        else:
+            author_str = authors_list[0]
         citation = f"{author_str} ({year}). {title}."
         if journal:
             citation += f" {journal}."
+
     elif style.lower() == "mla":
+        # MLA: "Author. \"Title.\" Journal, Year."
+        if len(authors_list) > 1:
+            author_str = ", ".join(authors_list[:-1]) + ", and " + authors_list[-1]
+        else:
+            author_str = authors_list[0]
         citation = f"{author_str}. \"{title}.\" {journal}, {year}."
+
+    elif style.lower() == "ieee":
+        # IEEE: "Author(s), \"Title,\" Journal, vol. x, no. x, pp. x, Year."
+        formatted_authors = []
+        for a in authors_list:
+            if "," in a: # Last, First
+                parts = a.split(",")
+                last = parts[0].strip()
+                first = parts[1].strip()
+                formatted_authors.append(f"{first[0]}. {last}")
+            else: # First Last
+                parts = a.split()
+                if len(parts) > 1:
+                    formatted_authors.append(f"{parts[0][0]}. {parts[-1]}")
+                else:
+                    formatted_authors.append(a)
+        
+        if len(formatted_authors) > 1:
+            author_str = ", ".join(formatted_authors[:-1]) + " and " + formatted_authors[-1]
+        else:
+            author_str = formatted_authors[0]
+            
+        citation = f"{author_str}, \"{title},\" {journal}"
+        if volume: citation += f", vol. {volume}"
+        if number: citation += f", no. {number}"
+        if pages: citation += f", pp. {pages}"
+        citation += f", {year}."
+
     else:
+        author_str = " and ".join(authors_list)
         citation = f"{author_str}, {title} ({year})."
     
     return citation
@@ -113,7 +152,7 @@ def main() -> None:
     parser.add_argument("--input", type=Path, default=Path("paper_info.json"), help="Input JSON file.")
     parser.add_argument("--output", type=Path, default=Path("papers.bib"), help="Output BibTeX file.")
     parser.add_argument("--citations", type=Path, help="Output file for formatted citations.")
-    parser.add_argument("--style", type=str, default="apa", choices=["apa", "mla"], help="Citation style.")
+    parser.add_argument("--style", type=str, default="apa", choices=["apa", "mla", "ieee"], help="Citation style.")
     parser.add_argument("--rename", action="store_true", help="Rename original PDFs.")
     parser.add_argument("--dir", type=Path, help="Directory of original PDFs.")
     parser.add_argument("--delay", type=float, default=1.0, help="Delay between requests.")

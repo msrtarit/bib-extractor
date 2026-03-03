@@ -13,7 +13,7 @@ A tiny, **pip‑installable** Python utility that scans a folder of PDF papers, 
 - Detects DOI strings with a robust regular expression.
 - **Multiple API Support**: Queries `doi.org` and falls back to **Crossref** for metadata.
 - **Auto-Rename**: Automatically renames PDFs to `Year - Author - Title.pdf`.
-- **Formatted Citations**: Generates **APA/MLA** style reference lists in a separate text file.
+- **Formatted Citations**: Generates **APA/MLA/IEEE** style reference lists in a separate text file.
 - **Visual Progress**: Includes a terminal progress bar for high‑volume processing.
 
 ---
@@ -81,7 +81,7 @@ python -m bib_extractor.fetch_bibtex --input paper_info.json --output papers.bib
 | `--output` | Path to save the BibTeX `.bib` file | `paper_info.json` |
 | `--input` | The JSON metadata file from Step 1 | *Required for Step 2* |
 | `--citations` | Output file for a formatted reference list (e.g. `refs.txt`) | Optional |
-| `--style` | Citation style for the reference list (`apa` or `mla`) | `apa` |
+| `--style` | Citation style for the reference list (`apa`, `mla`, or `ieee`) | `apa` |
 | `--rename` | Automatically rename PDFs to `Year - Author - Title.pdf` | Optional |
 
 ---
