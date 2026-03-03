@@ -9,10 +9,12 @@ A tiny, **pip‑installable** Python utility that scans a folder of PDF papers, 
 
 ## ✨ Features
 - Works on any folder of PDFs.
-- Uses `pdftotext` (Poppler) to read the first two pages of each PDF.
+- Uses `pdftotext` (Poppler) to read text from PDFs.
 - Detects DOI strings with a robust regular expression.
-- Falls back to the first few non‑empty lines as a title when no DOI is found.
-- Command‑line interface with `--dir` and `--output` options.
+- **Multiple API Support**: Queries `doi.org` and falls back to **Crossref** for metadata.
+- **Auto-Rename**: Automatically renames PDFs to `Year - Author - Title.pdf`.
+- **Formatted Citations**: Generates **APA/MLA** style reference lists in a separate text file.
+- **Visual Progress**: Includes a terminal progress bar for high‑volume processing.
 - Zero external Python dependencies (standard library only).
 
 ---
@@ -61,6 +63,8 @@ bib-fetch --input paper_info.json --output papers.bib --rename --dir path/to/pap
 ```
 - `--input`: The JSON file from the extractor.
 - `--output`: The destination `.bib` file.
+- `--citations`: (Optional) Output file for a formatted reference list (e.g., `refs.txt`).
+- `--style`: (Optional) Citation style for the list (`apa` or `mla`, default is `apa`).
 - `--rename`: (Optional) Automatically renames the files in `--dir` to a standard format: `Year - Author - Title.pdf`.
 - `--dir`: (Required if renaming) The folder where your original PDFs are located.
 
