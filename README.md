@@ -42,12 +42,11 @@ pip install -e .
 
 ## 🚀 Usage
 ### Extract DOIs / titles
-```bash
-# Using the installed command (if installed via pip)
+# Using the installed command
 bib-extractor --dir path/to/papers --output paper_info.json
 
-# Or run the script directly from the source checkout
-python -m bib_extractor.extract_bib_info --dir path/to/papers --output paper_info.json
+# If 'bib-extractor' is not in your PATH (common on Windows)
+python -m bib_extractor --dir path/to/papers --output paper_info.json
 ```
 - `--dir` defaults to the current working directory.
 - `--output` defaults to `paper_info.json`.
@@ -56,6 +55,9 @@ python -m bib_extractor.extract_bib_info --dir path/to/papers --output paper_inf
 ```bash
 # Fetch entries and automatically rename your PDFs
 bib-fetch --input paper_info.json --output papers.bib --rename --dir path/to/papers
+
+# If 'bib-fetch' is not in your PATH
+python -m bib_extractor.fetch_bibtex --input paper_info.json --output papers.bib --rename --dir path/to/papers
 ```
 - `--input`: The JSON file from the extractor.
 - `--output`: The destination `.bib` file.
