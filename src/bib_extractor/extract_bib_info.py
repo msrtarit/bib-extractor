@@ -1,9 +1,9 @@
 import os
-import subprocess
 import re
 import json
 import argparse
 from pathlib import Path
+from pypdf import PdfReader
 
 def get_num(s: str) -> int:
     """Extract leading number from filename for sorting."""
@@ -20,14 +20,13 @@ def extract_papers(dir_path: Path) -> list:
         full_path = dir_path / filename
         print(f"Processing {filename}...")
         try:
-            # Extract first two pages as text (requires poppler's pdftotext)
-            content = subprocess.check_output(
-                ['pdftotext', '-f', '1', '-l', '2', str(full_path), '-'],
-                stderr=subprocess.STDOUT,
-                text=True,
-                encoding='utf-8',
-                errors='ignore'
-            )
+            # Extract first two pages as text using pypdf
+            reader = PdfReader(str(full_path))
+            content = ""
+            # Read at most the first 2 pages
+            for i in range(min(2, len(reader.pages))):
+                content += reader.pages[i].extract_text() + "\n"
+                
             dois = doi_pattern.findall(content)
             if dois:
                 doi = max(dois, key=len)

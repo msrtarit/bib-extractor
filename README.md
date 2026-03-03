@@ -9,13 +9,12 @@ A tiny, **pip‑installable** Python utility that scans a folder of PDF papers, 
 
 ## ✨ Features
 - Works on any folder of PDFs.
-- Uses `pdftotext` (Poppler) to read text from PDFs.
+- **Pure Python**: No external tools like Poppler or `pdftotext` required.
 - Detects DOI strings with a robust regular expression.
 - **Multiple API Support**: Queries `doi.org` and falls back to **Crossref** for metadata.
 - **Auto-Rename**: Automatically renames PDFs to `Year - Author - Title.pdf`.
 - **Formatted Citations**: Generates **APA/MLA** style reference lists in a separate text file.
 - **Visual Progress**: Includes a terminal progress bar for high‑volume processing.
-- Zero external Python dependencies (standard library only).
 
 ---
 
@@ -24,17 +23,14 @@ A tiny, **pip‑installable** Python utility that scans a folder of PDF papers, 
 ```bash
 pip install bib-extractor
 ```
+
 ### From source
-1. **Install Poppler** – `pdftotext` is required.
-   - **Windows**: download from <https://github.com/oschwartz10612/poppler-windows/releases> and add the `bin` folder to your `PATH`.
-   - **macOS**: `brew install poppler`
-   - **Linux**: `sudo apt-get install poppler-utils`
-2. **Clone the repository**
+1. **Clone the repository**
 ```bash
 git clone https://github.com/msrtarit/bib_extractor.git
 cd bib_extractor
 ```
-3. (Optional) Create a virtual environment and install the package in editable mode:
+2. (Optional) Create a virtual environment and install the package in editable mode:
 ```bash
 python -m venv .venv
 .venv\\Scripts\\activate   # Windows
@@ -51,7 +47,7 @@ pip install -e .
 bib-extractor --dir path/to/papers --output paper_info.json
 
 # Or run the script directly from the source checkout
-python extract_bib_info.py --dir path/to/papers --output paper_info.json
+python -m bib_extractor.extract_bib_info --dir path/to/papers --output paper_info.json
 ```
 - `--dir` defaults to the current working directory.
 - `--output` defaults to `paper_info.json`.
@@ -68,20 +64,6 @@ bib-fetch --input paper_info.json --output papers.bib --rename --dir path/to/pap
 - `--rename`: (Optional) Automatically renames the files in `--dir` to a standard format: `Year - Author - Title.pdf`.
 - `--dir`: (Required if renaming) The folder where your original PDFs are located.
 
-The extractor prints progress and writes a JSON array like:
-```json
-[
-  {"file": "1.pdf", "doi": "10.1109/XYZ.2023.123456"},
-  {"file": "2.pdf", "title": "An Interesting Study on …"}
-]
-```
-
----
-
-## Next steps
-- Convert the generated `.bib` file to the citation style you need.
-- Extend the workflow with additional scripts or integrate into your bibliography manager.
-
 ---
 
 ## 🤝 Contributing
@@ -91,5 +73,3 @@ Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to fork 
 
 ## 📜 License
 This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
-
-
