@@ -22,3 +22,9 @@ Thumbs.db
 # Build and distribution artifacts
 dist/
 build/
+
+# Local outputs and test data
+paper_info.json
+test_*.json
+*.bib
+*.txt
