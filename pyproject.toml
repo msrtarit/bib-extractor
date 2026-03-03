@@ -17,8 +17,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/msrtarit/bib_extractor"
-Repository = "https://github.com/msrtarit/bib_extractor.git"
+Homepage = "https://github.com/msrtarit/bib-extractor"
+Repository = "https://github.com/msrtarit/bib-extractor.git"
 
 [project.scripts]
 bib-extractor = "bib_extractor.extract_bib_info:main"
