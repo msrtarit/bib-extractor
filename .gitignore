@@ -1,0 +1,21 @@
+# Common Python and OS artifacts to ignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+*.dist-info/
+*.log
+*.sqlite3
+.env
+venv/
+.venv/
+# IDE/editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+# OS files
+.DS_Store
+Thumbs.db
