@@ -1,7 +1,7 @@
 # Bib Extractor
 
-[![PyPI version](https://img.shields.io/pypi/v/bib-extractor.svg)](https://pypi.org/project/bib-extractor/)
-[![License: MIT](https://img.shields.io/pypi/l/bib-extractor.svg)](https://pypi.org/project/bib-extractor/)
+[![PyPI version](https://img.shields.io/pypi/v/bib-extractor.svg?color=blue)](https://pypi.org/project/bib-extractor/)
+[![License: MIT](https://img.shields.io/pypi/l/bib-extractor.svg?color=green)](https://pypi.org/project/bib-extractor/)
 
 A tiny, **pip‑installable** Python utility that scans a folder of PDF papers, extracts their DOI (or a title fallback), and produces a JSON file that can be turned into a BibTeX bibliography.
 
